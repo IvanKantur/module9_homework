@@ -3,10 +3,10 @@ const btn = document.querySelector('.submit');
 // Ищем див для результата
 const resultNode = document.querySelector('.result');
 
-function displayResult(apiData) {
-
+let locklStor = localStorage.getItem("myKey")
+if (locklStor) {
+    resultNode.innerHTML = locklStor;
 }
-
 
 btn.addEventListener('click', () => {
     const value1 = Number(document.querySelector('#inp1').value);
@@ -33,6 +33,8 @@ btn.addEventListener('click', () => {
                 });
 
                 resultNode.innerHTML = cards;
+                locklStor = cards;
+                localStorage.setItem("myKey", locklStor);
             })
 
     } else if (!((value1 >= 1)&&(value1 <= 10))&&!((value2 >= 1)&&(value2 <= 10))){resultNode.textContent = "Номер страницы и лимит вне диапазона от 1 до 10";}
